@@ -6,7 +6,6 @@ Developer Guide
 All you need to use a Model from Tiyaro is
 
 .. toctree::
-
    developer/servicetier
    developer/apitoken
    developer/modeltypes
