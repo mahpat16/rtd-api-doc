@@ -1,12 +1,7 @@
 Tiyaro Model API Documentation
 ==============================
 
-**Tiyaro Model API** (/lu'make/) is a Python library for cooks and food lovers
-that creates recipes mixing random ingredients.
-It pulls data from the `Open Food Facts database <https://world.openfoodfacts.org/>`_
-and offers a *simple* and *intuitive* API.
-
-**Tiyaro** makes AI/ML models available as API. Our goal is to make AI/ML accessible to all developers. 
+**`Tiyaro <https://tiyaro.ai>`** makes AI/ML models available as API. Our goal is to make AI/ML accessible to all developers. 
 Developers can use the model explorer to discover models based on their use case (twitter sentiment analysis, 
 forest fires, faces etc), the name of the model (effecientnet, bert, gpt2, etc), model 
 framework (Tensorflow, PyTorch, XGBoost) or model author.  All models found on Tiyaro are 
