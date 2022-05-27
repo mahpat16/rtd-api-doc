@@ -5,8 +5,16 @@ QuickStart
 
 All you need to use a Model from Tiyaro is
 
-1. **Find the API endpoint URL for the model from the UI.**
+#. :ref:`findapi`
+#. :ref:`genapikey` 
+#. :ref:`findsig` 
+#. :ref:`callapi` 
 
+
+.. _findapi:
+
+Find the API endpoint URL for the model from the UI
+---------------------------------------------------
 | e.g. See below the model card for model 'cardiffnlp/twitter-roberta-base-sentiment'
 
 .. image:: modelcard.png
@@ -19,11 +27,18 @@ All you need to use a Model from Tiyaro is
 
 The URL in this case is https://api.tiyaro.ai/v1/ent/huggingface/1/cardiffnlp/twitter-roberta-base-sentiment
 
-2. **Generate your API Key for use the API**
+.. _genapikey:
+
+Generate your API Key for use the API
+-------------------------------------
 
 Go to `API Keys <https://console.tiyaro.ai/apikeys>`_ page to generate your API key.
 
-3. **Find the input and output parameters of the API from its model type.**
+
+.. _findsig:
+
+Find the input and output parameters of the API from its model type
+-------------------------------------------------------------------
 
 Each Model API in tiyaro has a 'model type'. You can find out the 'model type' of the model from the model card. 
 
@@ -33,7 +48,10 @@ As seen above the 'model type' is right next to the API url. So the 'model type'
 
 Once you have the 'model type', look at the API reference in this doc for this 'model type' to find out its input and output parameters. In this example the API signature for ‘cardiffnlp/twitter-roberta-base-sentiment’ which is of model type ‘text-classification’ is <here>.
 
-4. **Call the API from your application.**
+.. _callapi:
+
+Call the API from your application
+----------------------------------
 
 The model Card has a ‘snippet’ for many languages that you can ‘adapt’ for use in your app. If you want fully functioning stand alone programs you can look at the `Tiyaro code samples repo <https://github.com/tiyaro/code-samples>`_.
 
