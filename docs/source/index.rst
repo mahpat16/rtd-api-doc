@@ -1,7 +1,7 @@
 Tiyaro Model API Documentation
 ==============================
 
-**`Tiyaro <https://tiyaro.ai>`** makes AI/ML models available as API. Our goal is to make AI/ML accessible to all developers. 
+`Tiyaro <https://tiyaro.ai>`_ makes AI/ML models available as API. Our goal is to make AI/ML accessible to all developers. 
 Developers can use the model explorer to discover models based on their use case (twitter sentiment analysis, 
 forest fires, faces etc), the name of the model (effecientnet, bert, gpt2, etc), model 
 framework (Tensorflow, PyTorch, XGBoost) or model author.  All models found on Tiyaro are 
@@ -15,14 +15,10 @@ Universe.
 This Guide is for developers trying to use the Tiyaro Model API in their application.
 
 
-.. note::
-
-   This project is under active development.
-
-Contents
---------
-
 .. toctree::
+   :hidden:
+
    quickstart
    samplemodel
    developer
+   apiref
