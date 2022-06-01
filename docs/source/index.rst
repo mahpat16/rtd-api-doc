@@ -1,5 +1,5 @@
-Tiyaro Model API Documentation
-==============================
+Tiyaro ML Models API Documentation
+==================================
 
 `Tiyaro <https://tiyaro.ai>`_ makes AI/ML models available as API. Our goal is to make AI/ML accessible to all developers. 
 Developers can use the model explorer to discover models based on their use case (twitter sentiment analysis, 
