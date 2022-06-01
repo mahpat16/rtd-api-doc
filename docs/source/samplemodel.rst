@@ -1,9 +1,9 @@
-Sample Model
-============
+Model Card
+==========
 
 .. _samplemodel:
 
-`Tiyaro Model Explorer <https://console.tiyaro.ai/explore>`_ allows you to search for models. Clicking on the results of the search will open the **model card**
+`Tiyaro Model Explorer <https://console.tiyaro.ai/explore>`_ allows you to search for models. Clicking on the results of the search will open the **model card** for that model.
 
 Here is a screenshot of the model card for model facebook/bart-large-cnn
 
