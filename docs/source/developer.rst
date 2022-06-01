@@ -83,6 +83,7 @@ The :ref:`model card <samplemodel>` for that model has pointers on how you can d
 See below the 'API Specification' available in the 'Developer Toolbox' on the :ref:`model card <samplemodel>`
 
 .. image:: devtoolbox.png
+   :scale: 50%
 
 
 .. _codesamples:
@@ -93,7 +94,7 @@ Our `github code samples repo <https://github.com/tiyaro/code-samples>`_ include
 inference APIs supported by Tiyaro in multiple languages. The samples are all self explanatory and are organized by the 
 various Model Types.
 
-Here is an example from the repo that invokes an image-object-detection model with a local image that is 
+Here is a python example from the repo that invokes an image-object-detection model with a local image that is 
 converted to the base64 format as expected by this API
 
 .. code-block:: python
