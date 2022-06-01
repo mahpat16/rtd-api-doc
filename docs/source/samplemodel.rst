@@ -12,7 +12,10 @@ Here is a screenshot of the model card for model facebook/bart-large-cnn
 Every model available on Tiyaro is readily accessible as an API endpoint. The model card includes the 
 
 * API endpoint URL
-* Model Type of the model
+* :ref:`modeltype` of the model
+
+
+.. _modeltypeoncard:
 
 For the facebook/bart-large-cnn model the API endpoint URL and the model type can be found on the model card as shown below.
 
