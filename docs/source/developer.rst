@@ -17,8 +17,8 @@ gpuflex
 .. csv-table:: 
    :header: "API endpoint", "Service Tier"
 
-   "https://api.tiyaro.ai/v1/ent/huggingface/1/facebook/bart-large-cnn", cpu-flex
-   "https://api.tiyaro.ai/v1/ent/huggingface/1/facebook/bart-large-cnn?serviceTier=gpuflex", gpu-flex
+   "https://api.tiyaro.ai/v1/ent/huggingface/1/facebook/bart-large-cnn", cpuflex
+   "https://api.tiyaro.ai/v1/ent/huggingface/1/facebook/bart-large-cnn?serviceTier=gpuflex", gpuflex
 
 
 .. hint:: On the model card if you click the "FlexGPU" button the API URL is updated to show the gpuflex url
@@ -26,9 +26,20 @@ gpuflex
 
 .. _apitoken:
 
-API Token
+API Key
 ---------
-This is an api token
+You need an API Key to invoke a model API. You can generate an API key for your account from the `API Keys page <https://console.tiyaro.ai/apikeys>`_. You pass in this API key as a **Bearer** token with the Authorization HTTP header in your http request. 
+
+The following example shows how you can pass in the API key in `cURL <https://curl.se/>`_  (replace 'YOUR_API_KEY' with your key). `Code samples repo <https://github.com/tiyaro/code-samples>`_ has examples for other programming languages for your reference.
+
+.. code-block:: console
+
+   curl --request POST \
+  --url https://api.tiyaro.ai/v1/ent/huggingface/1/facebook/bart-large-cnn \
+  --header 'accept: */*' \
+  --header 'authorization: Bearer YOUR_API_KEY' \
+  --header 'content-type: application/json' \
+  --data '{"input": "I feel the need - the need for speed!"}'
 
 
 .. _modeltype:
