@@ -6,13 +6,16 @@ Developer Guide
 Service Tier
 ------------
 
-The following service tiers are supported for each API. Service tiers define the backend that will service your API call and the infrastructure used to run your model inference.
+The following service tiers are supported for each API. Service tiers define the backend that will service 
+your API call and the infrastructure used to run your model inference.
 
 cpuflex
-   This service tier means that your API inference will run on cpu instance. It is the **default** service tier for each API.
+   This service tier means that your API inference will run on cpu instance. It is the **default** service 
+   tier for each API.
 
 gpuflex
-   This service tier means that your API inference will run on gpu instance. You have to add the query parameter **"serviceTier=gpuflex"** to an API endpoint to use gpu instance (see below). 
+   This service tier means that your API inference will run on gpu instance. You have to add the query 
+   parameter **"serviceTier=gpuflex"** to an API endpoint to use gpu instance, see table below. 
 
 .. csv-table:: 
    :header: "API endpoint", "Service Tier"
@@ -28,9 +31,13 @@ gpuflex
 
 API Key
 ---------
-You need an API Key to invoke a model API. You can generate an API key for your account from the `API Keys page <https://console.tiyaro.ai/apikeys>`_. You pass in this API key as a **Bearer** token with the Authorization HTTP header in your http request. 
+You need an API Key to invoke a model API. You can generate an API key for your account from 
+the `API Keys page <https://console.tiyaro.ai/apikeys>`_. You pass in this API key 
+as a **Bearer** token with the Authorization HTTP header in your http request. 
 
-The following example shows how you can pass in the API key in `cURL <https://curl.se/>`_  (replace 'YOUR_API_KEY' with your key). Our `gitHub code samples repo <https://github.com/tiyaro/code-samples>`_ has examples for other programming languages for your reference.
+The following example shows how you can pass in the API key in `cURL <https://curl.se/>`_  (replace 
+'YOUR_API_KEY' with your key). Our `github code samples repo <https://github.com/tiyaro/code-samples>`_ has 
+examples for other programming languages for your reference.
 
 .. code-block:: console
 

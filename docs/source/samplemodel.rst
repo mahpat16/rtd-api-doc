@@ -20,6 +20,8 @@ Every model available on Tiyaro is readily accessible as an API endpoint. The mo
 For the facebook/bart-large-cnn model the API endpoint URL and the model type can be found on the model card as shown below.
 
 .. image:: facebookbarttype.png
+  :width: 75%
+
 
 
 As seen above the endpoint and type for this model are 
