@@ -40,13 +40,17 @@ Go to `API Keys <https://console.tiyaro.ai/apikeys>`_ page to generate your API 
 Find the input and output parameters of the API from its model type
 -------------------------------------------------------------------
 
-Each Model API in tiyaro has a 'model type'. You can find out the 'model type' of the model from the model card. 
+Each Model API in tiyaro has a :ref:`Model Type <modeltype>`. You can find out the 'model type' of the model 
+from the model card. 
 
 .. image:: modeltype.png
 
-As seen above the 'model type' is right next to the API url. So the 'model type' of ‘cardiffnlp/twitter-roberta-base-sentiment’ is ‘text-classification’.
+As seen above the 'model type' is right next to the API url. So the 'model type' of 
+‘cardiffnlp/twitter-roberta-base-sentiment’ is ‘text-classification’.
 
-Once you have the 'model type', look at the API reference in this doc for this 'model type' to find out its input and output parameters. In this example the API signature for ‘cardiffnlp/twitter-roberta-base-sentiment’ which is of model type ‘text-classification’ is <here>.
+Once you have the 'model type', look at the :ref:`API reference <apiref>` for this 'model type' to find out its 
+input and output parameters. In this example the API signature for ‘cardiffnlp/twitter-roberta-base-sentiment’ 
+which is of model type ‘text-classification’ is <here>.
 
 .. _callapi:
 
