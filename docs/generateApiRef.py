@@ -6,6 +6,33 @@ import json
 import yaml
 
 
+def baseAPIRefRST():
+    s = '''
+API Reference
+==============
+
+.. _apiref: 
+
+The following API reference is organized by :ref:`Model Type <modeltype>`. The actual 'Post' path below should be 
+replaced with the path to the specific model :ref:`API endpoint URL <modeltypeoncard>`.
+'''
+    return s
+
+
+def addApiRefRST(rst, klass):
+    template = f'''
+
+{klass}
+{"-"*len(klass)}
+
+.. _{klass}:
+
+.. openapi:: ./apiref/{klass}.yaml
+
+    '''
+    return rst + template
+
+
 def getSwaggerSpec(klass, trn):
     print(f"Fetching swagger spec for {klass} => {trn}")
     graphqlAPI = 'https://5hhkqgefp5ebfbem2rtvmw3ybe.appsync-api.us-west-2.amazonaws.com/graphql'
@@ -51,10 +78,22 @@ def getSwaggerSpec(klass, trn):
 
 
 def getAllSpecs():
+    # Get all the supported model types i.e. klasses
     klasses = DBHelper.getAllModelClasses()
+
+    # Get the swagger 2.0 spec for each class
     for klass in klasses:
         trn = DBHelper.getAModelForClass(klass)
-        getSwaggerSpec(klass, trn)
+        # getSwaggerSpec(klass, trn)
+
+    # Generate apiref.rst
+    rst = baseAPIRefRST()
+    for klass in klasses:
+        rst = addApiRefRST(rst, klass)
+
+    apiRST = "./source/apiref.rst"
+    with open(apiRST, "w") as f:
+        f.write(rst)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,78 @@
+swagger: '2.0'
+info:
+  title: Tiyaro
+  version: '1.0'
+host: api.tiyaro.ai
+basePath: /
+schemes:
+  - https
+paths:
+  /model_specific_path:
+    parameters:
+      - description: 'Available service tiers: [cpuflex(default), gpuflex]'
+        in: query
+        name: serviceTier
+        required: false
+        type: string
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/NLPInput'
+      responses:
+        '200':
+          description: Success
+          schema:
+            properties:
+              response:
+                items:
+                  $ref: '#/definitions/FillMaskResponse'
+                type: array
+            type: object
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Error:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    required:
+      - code
+      - message
+    type: object
+  FillMaskResponse:
+    properties:
+      score:
+        type: number
+      sequence:
+        type: string
+      token:
+        type: integer
+      token_str:
+        type: string
+    type: object
+  NLPInput:
+    properties:
+      input:
+        type: string
+    required:
+      - input
+    type: object
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+security:
+  - BearerAuth: []
+x-components: {}
+

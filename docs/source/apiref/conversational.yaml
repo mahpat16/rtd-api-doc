@@ -1,0 +1,97 @@
+swagger: '2.0'
+info:
+  title: Tiyaro
+  version: '1.0'
+host: api.tiyaro.ai
+basePath: /
+schemes:
+  - https
+paths:
+  /model_specific_path:
+    parameters:
+      - description: 'Available service tiers: [cpuflex(default), gpuflex]'
+        in: query
+        name: serviceTier
+        required: false
+        type: string
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/NLPConversational'
+      responses:
+        '200':
+          description: Success
+          schema:
+            properties:
+              response:
+                $ref: '#/definitions/ConverstationResponse'
+            type: object
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Conversation:
+    properties:
+      generated_responses:
+        items:
+          type: string
+        type: array
+      past_user_inputs:
+        items:
+          type: string
+        type: array
+    type: object
+  ConverstationResponse:
+    properties:
+      conversation:
+        $ref: '#/definitions/Conversation'
+      generated_text:
+        type: string
+      warnings:
+        items:
+          type: string
+        type: array
+    type: object
+  Error:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    required:
+      - code
+      - message
+    type: object
+  NLPConversational:
+    properties:
+      input:
+        type: string
+      oldInputs:
+        items:
+          type: string
+        type: array
+      oldOutputs:
+        items:
+          type: string
+        type: array
+    required:
+      - input
+      - oldInputs
+      - oldOutputs
+    type: object
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+security:
+  - BearerAuth: []
+x-components: {}
+
