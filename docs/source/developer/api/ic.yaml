@@ -1,0 +1,97 @@
+swagger: '2.0'
+info:
+  title: Tiyaro
+  version: '1.0'
+host: api.tiyaro.ai
+basePath: /
+schemes:
+  - https
+paths:
+  /v1/ent/google/5/imagenet/inception_resnet_v2/classification:
+    parameters:
+      - description: 'Available service tiers: [cpuflex(default), gpuflex]'
+        in: query
+        name: serviceTier
+        required: false
+        type: string
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ImageClassificationParam'
+      responses:
+        '200':
+          description: Success
+          schema:
+            properties:
+              response:
+                $ref: '#/definitions/ModelClassification'
+            type: object
+definitions:
+  Error:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    required:
+      - code
+      - message
+    type: object
+  ImageClassification:
+    properties:
+      classification:
+        type: string
+      score:
+        type: number
+    required:
+      - classification
+      - score
+    type: object
+  ImageClassificationParam:
+    properties:
+      imageRef:
+        $ref: '#/definitions/ImageRef'
+      limit:
+        description: Number of top classifiication results show
+        type: integer
+    required:
+      - imageRef
+    type: object
+  ImageRef:
+    properties:
+      Bytes:
+        description: Base64 encoded image. Only one of Bytes or URL should be specified
+        type: string
+      URL:
+        description: URI of image. Only one of Bytes or URL should be specified
+        type: string
+    type: object
+  ModelClassification:
+    properties:
+      classification:
+        items:
+          $ref: '#/definitions/ImageClassification'
+        type: array
+      error:
+        $ref: '#/definitions/Error'
+      model:
+        type: string
+    required:
+      - classification
+      - model
+    type: object
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+security:
+  - BearerAuth: []
+x-components: {}
+
