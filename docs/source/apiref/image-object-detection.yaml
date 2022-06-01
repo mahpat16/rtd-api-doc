@@ -1,0 +1,104 @@
+swagger: '2.0'
+info:
+  title: Tiyaro
+  version: '1.0'
+host: api.tiyaro.ai
+basePath: /
+schemes:
+  - https
+paths:
+  /model_specific_path:
+    parameters:
+      - description: 'Available service tiers: [cpuflex(default), gpuflex]'
+        in: query
+        name: serviceTier
+        required: false
+        type: string
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ObjectDetetionParm'
+      responses:
+        '200':
+          description: Success
+          schema:
+            properties:
+              response:
+                $ref: '#/definitions/ModelDetection'
+            type: object
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Error:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    required:
+      - code
+      - message
+    type: object
+  ImageRef:
+    properties:
+      Bytes:
+        description: Base64 encoded image. Only one of Bytes or URL should be specified
+        type: string
+      URL:
+        description: URI of image. Only one of Bytes or URL should be specified
+        type: string
+    type: object
+  ModelDetection:
+    properties:
+      detection:
+        items:
+          $ref: '#/definitions/ObjectDetectionResult'
+        type: array
+      error:
+        $ref: '#/definitions/Error'
+      model:
+        type: string
+    type: object
+  ObjectDetectionResult:
+    properties:
+      bounding_box:
+        description: 'left, top, right, bottom'
+        items:
+          type: number
+        type: array
+      obj_class:
+        type: string
+      score:
+        type: number
+    required:
+      - bounding_box
+      - obj_class
+      - score
+    type: object
+  ObjectDetetionParm:
+    properties:
+      imageRef:
+        $ref: '#/definitions/ImageRef'
+      minimum_score:
+        description: Filter out detections with score below this
+        type: integer
+    required:
+      - imageRef
+    type: object
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+security:
+  - BearerAuth: []
+x-components: {}
+

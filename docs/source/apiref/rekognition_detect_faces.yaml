@@ -1,0 +1,165 @@
+swagger: '2.0'
+info:
+  title: Tiyaro
+  version: '1.0'
+host: api.tiyaro.ai
+basePath: /
+schemes:
+  - https
+paths:
+  /model_specific_path:
+    parameters:
+      - description: 'Available service tiers: [cpuflex(default), gpuflex]'
+        in: query
+        name: serviceTier
+        required: false
+        type: string
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RekognitionDetectFacesParam'
+      responses:
+        '200':
+          description: Success
+          schema:
+            properties:
+              response:
+                $ref: '#/definitions/RekognitionFaceDetectResponse'
+            type: object
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Error:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    required:
+      - code
+      - message
+    type: object
+  ImageRef:
+    properties:
+      Bytes:
+        description: Base64 encoded image. Only one of Bytes or URL should be specified
+        type: string
+      URL:
+        description: URI of image. Only one of Bytes or URL should be specified
+        type: string
+    type: object
+  RekognitionBoundingBox:
+    properties:
+      Height:
+        type: number
+      Left:
+        type: number
+      Top:
+        type: number
+      Width:
+        type: number
+    type: object
+  RekognitionConfidenceValue:
+    properties:
+      Confidence:
+        type: number
+      Value:
+        type: boolean
+    type: object
+  RekognitionDetectFacesParam:
+    properties:
+      Image:
+        $ref: '#/definitions/ImageRef'
+      QualityFilter:
+        type: string
+      SimilarityThreshold:
+        type: number
+    required:
+      - Image
+    type: object
+  RekognitionFaceDetail:
+    properties:
+      AgeRange:
+        $ref: '#/definitions/RekognitionConfidenceValue'
+      Beard:
+        $ref: '#/definitions/RekognitionConfidenceValue'
+      BoundingBox:
+        $ref: '#/definitions/RekognitionBoundingBox'
+      Confidence:
+        type: number
+      Emotions:
+        items:
+          $ref: '#/definitions/RekognitionConfidenceValue'
+        type: array
+      Eyeglasses:
+        $ref: '#/definitions/RekognitionConfidenceValue'
+      EyesOpen:
+        $ref: '#/definitions/RekognitionConfidenceValue'
+      Gender:
+        $ref: '#/definitions/RekognitionConfidenceValue'
+      Landmarks:
+        items:
+          $ref: '#/definitions/RekognitionLandmark'
+        type: array
+      MouthOpen:
+        $ref: '#/definitions/RekognitionConfidenceValue'
+      Mustache:
+        $ref: '#/definitions/RekognitionConfidenceValue'
+      Pose:
+        $ref: '#/definitions/RekognitionPose'
+      Quality:
+        $ref: '#/definitions/RekognitionQuality'
+      Smile:
+        $ref: '#/definitions/RekognitionConfidenceValue'
+      Sunglasses:
+        $ref: '#/definitions/RekognitionConfidenceValue'
+    type: object
+  RekognitionFaceDetectResponse:
+    properties:
+      FaceDetails:
+        items:
+          $ref: '#/definitions/RekognitionFaceDetail'
+        type: array
+    type: object
+  RekognitionLandmark:
+    properties:
+      Type:
+        type: string
+      X:
+        type: number
+      'Y':
+        type: number
+    type: object
+  RekognitionPose:
+    properties:
+      Pitch:
+        type: number
+      Roll:
+        type: number
+      Yaw:
+        type: number
+    type: object
+  RekognitionQuality:
+    properties:
+      Brightness:
+        type: number
+      Sharpness:
+        type: number
+    type: object
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+security:
+  - BearerAuth: []
+x-components: {}
+

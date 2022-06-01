@@ -1,0 +1,159 @@
+swagger: '2.0'
+info:
+  title: Tiyaro
+  version: '1.0'
+host: api.tiyaro.ai
+basePath: /
+schemes:
+  - https
+paths:
+  /model_specific_path:
+    parameters:
+      - description: 'Available service tiers: [cpuflex(default), gpuflex]'
+        in: query
+        name: serviceTier
+        required: false
+        type: string
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/RekognitionDetectTextParam'
+      responses:
+        '200':
+          description: Success
+          schema:
+            properties:
+              response:
+                $ref: '#/definitions/RekognitionDetectTextResponse'
+            type: object
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  BoundingBoxObject:
+    properties:
+      Height:
+        type: number
+      Left:
+        type: number
+      Top:
+        type: number
+      Width:
+        type: number
+    type: object
+  Error:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    required:
+      - code
+      - message
+    type: object
+  Filters:
+    properties:
+      RegionsOfInterest:
+        $ref: '#/definitions/RegionsOfInterestObject'
+      WordFilter:
+        $ref: '#/definitions/WordFilterObject'
+    type: object
+  ImageRef:
+    properties:
+      Bytes:
+        description: Base64 encoded image. Only one of Bytes or URL should be specified
+        type: string
+      URL:
+        description: URI of image. Only one of Bytes or URL should be specified
+        type: string
+    type: object
+  RegionsOfInterestObject:
+    properties:
+      BoundingBox:
+        $ref: '#/definitions/BoundingBoxObject'
+    type: object
+  RekognitionBoundingBox:
+    properties:
+      Height:
+        type: number
+      Left:
+        type: number
+      Top:
+        type: number
+      Width:
+        type: number
+    type: object
+  RekognitionDetectTextParam:
+    properties:
+      Filters:
+        $ref: '#/definitions/Filters'
+      Image:
+        $ref: '#/definitions/ImageRef'
+    required:
+      - Image
+    type: object
+  RekognitionDetectTextResponse:
+    properties:
+      TextDetectios:
+        items:
+          $ref: '#/definitions/RekognitionTextDetection'
+        type: array
+      TextModelVersion:
+        type: string
+    type: object
+  RekognitionGeometry:
+    properties:
+      BoundingBox:
+        $ref: '#/definitions/RekognitionBoundingBox'
+      Polygon:
+        items:
+          $ref: '#/definitions/RekognitionPoint'
+        type: array
+    type: object
+  RekognitionPoint:
+    properties:
+      X:
+        type: number
+      'Y':
+        type: number
+    type: object
+  RekognitionTextDetection:
+    properties:
+      Confidence:
+        type: number
+      DetectedText:
+        type: string
+      Geometry:
+        $ref: '#/definitions/RekognitionGeometry'
+      Id:
+        type: number
+      ParentId:
+        type: number
+      Type:
+        type: string
+    type: object
+  WordFilterObject:
+    properties:
+      MinBoundingBoxHeight:
+        type: number
+      MinBoundingBoxWidth:
+        type: number
+      MinConfidence:
+        type: number
+    type: object
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+security:
+  - BearerAuth: []
+x-components: {}
+
