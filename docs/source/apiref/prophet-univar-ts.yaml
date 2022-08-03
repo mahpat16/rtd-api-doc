@@ -1,0 +1,153 @@
+swagger: '2.0'
+info:
+  title: Tiyaro
+  version: '1.0'
+host: api.tiyaro.ai
+basePath: /
+schemes:
+  - https
+paths:
+  /model_specific_path:
+    parameters:
+      - description: 'Available service tiers: [cpuflex(default), gpuflex]'
+        in: query
+        name: serviceTier
+        required: false
+        type: string
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TsUnivariateProphet'
+      responses:
+        '200':
+          description: Success
+          schema:
+            properties:
+              response:
+                $ref: '#/definitions/TSProphetOut'
+            type: object
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Error:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    required:
+      - code
+      - message
+    type: object
+  TSProphetOut:
+    properties:
+      additive_terms:
+        items:
+          type: number
+        type: array
+      additive_terms_lower:
+        items:
+          type: number
+        type: array
+      additive_terms_upper:
+        items:
+          type: number
+        type: array
+      ds:
+        items:
+          type: string
+        type: array
+      multiplicative_terms:
+        items:
+          type: number
+        type: array
+      multiplicative_terms_lower:
+        items:
+          type: number
+        type: array
+      multiplicative_terms_upper:
+        items:
+          type: number
+        type: array
+      trend:
+        items:
+          type: number
+        type: array
+      trend_lower:
+        items:
+          type: number
+        type: array
+      trend_upper:
+        items:
+          type: number
+        type: array
+      weekly:
+        items:
+          type: number
+        type: array
+      weekly_lower:
+        items:
+          type: number
+        type: array
+      weekly_upper:
+        items:
+          type: number
+        type: array
+      yearly:
+        items:
+          type: number
+        type: array
+      yearly_lower:
+        items:
+          type: number
+        type: array
+      yearly_upper:
+        items:
+          type: number
+        type: array
+      yhat:
+        items:
+          type: number
+        type: array
+      yhat_lower:
+        items:
+          type: number
+        type: array
+      yhat_tiyaro:
+        items:
+          type: number
+        type: array
+      yhat_upper:
+        items:
+          type: number
+        type: array
+    type: object
+  TsUnivariateProphet:
+    properties:
+      freq:
+        description: Requested Frequency of forecast.
+        type: string
+      periods:
+        description: Integer used to indicate forecast period for the given time interval
+        type: integer
+    required:
+      - freq
+      - periods
+    type: object
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+security:
+  - BearerAuth: []
+x-components: {}
+

@@ -1,0 +1,103 @@
+swagger: '2.0'
+info:
+  title: Tiyaro
+  version: '1.0'
+host: api.tiyaro.ai
+basePath: /
+schemes:
+  - https
+paths:
+  /model_specific_path:
+    parameters:
+      - description: 'Available service tiers: [cpuflex(default), gpuflex]'
+        in: query
+        name: serviceTier
+        required: false
+        type: string
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/ImageRef'
+      responses:
+        '200':
+          description: Success
+          schema:
+            properties:
+              response:
+                $ref: '#/definitions/OpenPoseResp'
+            type: object
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  CandidateBodyPoint:
+    properties:
+      body25_index:
+        type: number
+      confidence:
+        type: number
+      index:
+        type: number
+      x:
+        type: number
+      'y':
+        type: number
+    required:
+      - confidence
+      - index
+      - x
+      - 'y'
+    type: object
+  Error:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    required:
+      - code
+      - message
+    type: object
+  ImageRef:
+    properties:
+      Bytes:
+        description: Base64 encoded image. Only one of Bytes or URL should be specified
+        type: string
+      URL:
+        description: URI of image. Only one of Bytes or URL should be specified
+        type: string
+    type: object
+  OpenPoseOut:
+    properties:
+      candidate:
+        items:
+          $ref: '#/definitions/CandidateBodyPoint'
+        type: array
+      coco_format_subsets:
+        items:
+          items:
+            type: number
+          type: array
+        type: array
+    type: object
+  OpenPoseResp:
+    properties:
+      response:
+        $ref: '#/definitions/OpenPoseOut'
+    type: object
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+security:
+  - BearerAuth: []
+x-components: {}
+

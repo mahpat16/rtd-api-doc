@@ -8,12 +8,84 @@ The following API reference is organized by :ref:`Model Type <modeltype>`. The a
 replaced with the path to the specific model :ref:`API endpoint URL <modeltypeoncard>`.
 
 
-fill-mask
----------
+gcp_detect_safe_search
+----------------------
 
-.. _fill-mask:
+.. _gcp_detect_safe_search:
 
-.. openapi:: ./apiref/fill-mask.yaml
+.. openapi:: ./apiref/gcp_detect_safe_search.yaml
+
+    
+
+fbprophet-uni-ts
+----------------
+
+.. _fbprophet-uni-ts:
+
+.. openapi:: ./apiref/fbprophet-uni-ts.yaml
+
+    
+
+automatic-speech-recognition
+----------------------------
+
+.. _automatic-speech-recognition:
+
+.. openapi:: ./apiref/automatic-speech-recognition.yaml
+
+    
+
+autoarima-uni-ts
+----------------
+
+.. _autoarima-uni-ts:
+
+.. openapi:: ./apiref/autoarima-uni-ts.yaml
+
+    
+
+timeseries-exo
+--------------
+
+.. _timeseries-exo:
+
+.. openapi:: ./apiref/timeseries-exo.yaml
+
+    
+
+image-transform
+---------------
+
+.. _image-transform:
+
+.. openapi:: ./apiref/image-transform.yaml
+
+    
+
+text-generation
+---------------
+
+.. _text-generation:
+
+.. openapi:: ./apiref/text-generation.yaml
+
+    
+
+sarimax-multi-ts
+----------------
+
+.. _sarimax-multi-ts:
+
+.. openapi:: ./apiref/sarimax-multi-ts.yaml
+
+    
+
+image-classification
+--------------------
+
+.. _image-classification:
+
+.. openapi:: ./apiref/image-classification.yaml
 
     
 
@@ -26,6 +98,150 @@ translation
 
     
 
+question-answering
+------------------
+
+.. _question-answering:
+
+.. openapi:: ./apiref/question-answering.yaml
+
+    
+
+rekognition_detect_labels
+-------------------------
+
+.. _rekognition_detect_labels:
+
+.. openapi:: ./apiref/rekognition_detect_labels.yaml
+
+    
+
+rekognition_detect_text
+-----------------------
+
+.. _rekognition_detect_text:
+
+.. openapi:: ./apiref/rekognition_detect_text.yaml
+
+    
+
+autosarimax-multi-ts
+--------------------
+
+.. _autosarimax-multi-ts:
+
+.. openapi:: ./apiref/autosarimax-multi-ts.yaml
+
+    
+
+car_license_plate_recognizer
+----------------------------
+
+.. _car_license_plate_recognizer:
+
+.. openapi:: ./apiref/car_license_plate_recognizer.yaml
+
+    
+
+gcp_detect_text
+---------------
+
+.. _gcp_detect_text:
+
+.. openapi:: ./apiref/gcp_detect_text.yaml
+
+    
+
+gcp_detect_crop_hints
+---------------------
+
+.. _gcp_detect_crop_hints:
+
+.. openapi:: ./apiref/gcp_detect_crop_hints.yaml
+
+    
+
+audio-classification
+--------------------
+
+.. _audio-classification:
+
+.. openapi:: ./apiref/audio-classification.yaml
+
+    
+
+ops-test
+--------
+
+.. _ops-test:
+
+.. openapi:: ./apiref/ops-test.yaml
+
+    
+
+gcp_detect_web_geo
+------------------
+
+.. _gcp_detect_web_geo:
+
+.. openapi:: ./apiref/gcp_detect_web_geo.yaml
+
+    
+
+rekognition_compare_faces
+-------------------------
+
+.. _rekognition_compare_faces:
+
+.. openapi:: ./apiref/rekognition_compare_faces.yaml
+
+    
+
+sarimax-uni-ts
+--------------
+
+.. _sarimax-uni-ts:
+
+.. openapi:: ./apiref/sarimax-uni-ts.yaml
+
+    
+
+text-classification
+-------------------
+
+.. _text-classification:
+
+.. openapi:: ./apiref/text-classification.yaml
+
+    
+
+gcp_detect_document
+-------------------
+
+.. _gcp_detect_document:
+
+.. openapi:: ./apiref/gcp_detect_document.yaml
+
+    
+
+optical-character-recognition
+-----------------------------
+
+.. _optical-character-recognition:
+
+.. openapi:: ./apiref/optical-character-recognition.yaml
+
+    
+
+gcp_detect_web
+--------------
+
+.. _gcp_detect_web:
+
+.. openapi:: ./apiref/gcp_detect_web.yaml
+
+    
+
 gcp_detect_object
 -----------------
 
@@ -35,21 +251,21 @@ gcp_detect_object
 
     
 
-rekognition_detect_moderation_labels
-------------------------------------
+summarization
+-------------
 
-.. _rekognition_detect_moderation_labels:
+.. _summarization:
 
-.. openapi:: ./apiref/rekognition_detect_moderation_labels.yaml
+.. openapi:: ./apiref/summarization.yaml
 
     
 
-question-answering
-------------------
+gcp_detect_landmarks
+--------------------
 
-.. _question-answering:
+.. _gcp_detect_landmarks:
 
-.. openapi:: ./apiref/question-answering.yaml
+.. openapi:: ./apiref/gcp_detect_landmarks.yaml
 
     
 
@@ -71,111 +287,21 @@ rekognition_detect_faces
 
     
 
-gcp_detect_web
+univar-prophet
 --------------
 
-.. _gcp_detect_web:
+.. _univar-prophet:
 
-.. openapi:: ./apiref/gcp_detect_web.yaml
-
-    
-
-gcp_detect_labels
------------------
-
-.. _gcp_detect_labels:
-
-.. openapi:: ./apiref/gcp_detect_labels.yaml
+.. openapi:: ./apiref/univar-prophet.yaml
 
     
 
-gcp_detect_landmarks
---------------------
+prophet-uni-ts
+--------------
 
-.. _gcp_detect_landmarks:
+.. _prophet-uni-ts:
 
-.. openapi:: ./apiref/gcp_detect_landmarks.yaml
-
-    
-
-gcp_detect_logos
-----------------
-
-.. _gcp_detect_logos:
-
-.. openapi:: ./apiref/gcp_detect_logos.yaml
-
-    
-
-gcp_detect_document
--------------------
-
-.. _gcp_detect_document:
-
-.. openapi:: ./apiref/gcp_detect_document.yaml
-
-    
-
-text-classification
--------------------
-
-.. _text-classification:
-
-.. openapi:: ./apiref/text-classification.yaml
-
-    
-
-gcp_detect_crop_hints
----------------------
-
-.. _gcp_detect_crop_hints:
-
-.. openapi:: ./apiref/gcp_detect_crop_hints.yaml
-
-    
-
-text-generation
----------------
-
-.. _text-generation:
-
-.. openapi:: ./apiref/text-generation.yaml
-
-    
-
-rekognition_detect_text
------------------------
-
-.. _rekognition_detect_text:
-
-.. openapi:: ./apiref/rekognition_detect_text.yaml
-
-    
-
-gcp_detect_safe_search
-----------------------
-
-.. _gcp_detect_safe_search:
-
-.. openapi:: ./apiref/gcp_detect_safe_search.yaml
-
-    
-
-rekognition_compare_faces
--------------------------
-
-.. _rekognition_compare_faces:
-
-.. openapi:: ./apiref/rekognition_compare_faces.yaml
-
-    
-
-automatic-speech-recognition
-----------------------------
-
-.. _automatic-speech-recognition:
-
-.. openapi:: ./apiref/automatic-speech-recognition.yaml
+.. openapi:: ./apiref/prophet-uni-ts.yaml
 
     
 
@@ -188,75 +314,21 @@ gcp_detect_faces
 
     
 
-rekognition_detect_labels
--------------------------
+image-to-text
+-------------
 
-.. _rekognition_detect_labels:
+.. _image-to-text:
 
-.. openapi:: ./apiref/rekognition_detect_labels.yaml
-
-    
-
-conversational
---------------
-
-.. _conversational:
-
-.. openapi:: ./apiref/conversational.yaml
+.. openapi:: ./apiref/image-to-text.yaml
 
     
 
-image-transform
----------------
+gcp_detect_logos
+----------------
 
-.. _image-transform:
+.. _gcp_detect_logos:
 
-.. openapi:: ./apiref/image-transform.yaml
-
-    
-
-car_license_plate_recognizer
-----------------------------
-
-.. _car_license_plate_recognizer:
-
-.. openapi:: ./apiref/car_license_plate_recognizer.yaml
-
-    
-
-gcp_detect_web_geo
-------------------
-
-.. _gcp_detect_web_geo:
-
-.. openapi:: ./apiref/gcp_detect_web_geo.yaml
-
-    
-
-gcp_detect_properties
----------------------
-
-.. _gcp_detect_properties:
-
-.. openapi:: ./apiref/gcp_detect_properties.yaml
-
-    
-
-audio-classification
---------------------
-
-.. _audio-classification:
-
-.. openapi:: ./apiref/audio-classification.yaml
-
-    
-
-gcp_detect_text
----------------
-
-.. _gcp_detect_text:
-
-.. openapi:: ./apiref/gcp_detect_text.yaml
+.. openapi:: ./apiref/gcp_detect_logos.yaml
 
     
 
@@ -269,12 +341,21 @@ rekognition_detect_protective_equipment
 
     
 
-summarization
--------------
+image-object-detection
+----------------------
 
-.. _summarization:
+.. _image-object-detection:
 
-.. openapi:: ./apiref/summarization.yaml
+.. openapi:: ./apiref/image-object-detection.yaml
+
+    
+
+conversational
+--------------
+
+.. _conversational:
+
+.. openapi:: ./apiref/conversational.yaml
 
     
 
@@ -287,20 +368,74 @@ zero-shot-classification
 
     
 
-image-classification
---------------------
+rekognition_detect_moderation_labels
+------------------------------------
 
-.. _image-classification:
+.. _rekognition_detect_moderation_labels:
 
-.. openapi:: ./apiref/image-classification.yaml
+.. openapi:: ./apiref/rekognition_detect_moderation_labels.yaml
 
     
 
-image-object-detection
-----------------------
+prophet-multi-ts
+----------------
 
-.. _image-object-detection:
+.. _prophet-multi-ts:
 
-.. openapi:: ./apiref/image-object-detection.yaml
+.. openapi:: ./apiref/prophet-multi-ts.yaml
+
+    
+
+fill-mask
+---------
+
+.. _fill-mask:
+
+.. openapi:: ./apiref/fill-mask.yaml
+
+    
+
+univar
+------
+
+.. _univar:
+
+.. openapi:: ./apiref/univar.yaml
+
+    
+
+pose-detection
+--------------
+
+.. _pose-detection:
+
+.. openapi:: ./apiref/pose-detection.yaml
+
+    
+
+autosarimax-uni-ts
+------------------
+
+.. _autosarimax-uni-ts:
+
+.. openapi:: ./apiref/autosarimax-uni-ts.yaml
+
+    
+
+gcp_detect_properties
+---------------------
+
+.. _gcp_detect_properties:
+
+.. openapi:: ./apiref/gcp_detect_properties.yaml
+
+    
+
+gcp_detect_labels
+-----------------
+
+.. _gcp_detect_labels:
+
+.. openapi:: ./apiref/gcp_detect_labels.yaml
 
     

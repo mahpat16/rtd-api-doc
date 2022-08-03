@@ -1,0 +1,82 @@
+swagger: '2.0'
+info:
+  title: Tiyaro
+  version: '1.0'
+host: api.tiyaro.ai
+basePath: /
+schemes:
+  - https
+paths:
+  /model_specific_path:
+    parameters:
+      - description: 'Available service tiers: [cpuflex(default), gpuflex]'
+        in: query
+        name: serviceTier
+        required: false
+        type: string
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/TsExogeneousVariables'
+      responses:
+        '200':
+          description: Success
+          schema:
+            properties:
+              response:
+                $ref: '#/definitions/TSExogeneousVariablesOut'
+            type: object
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  Error:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    required:
+      - code
+      - message
+    type: object
+  TSExogeneousVariablesOut:
+    properties:
+      prediction:
+        items:
+          type: number
+        type: array
+    type: object
+  TsExogeneousVariables:
+    properties:
+      inputCols:
+        description: >-
+          The input column(s) representing the exogeneous variable(s) in the
+          test csv file
+        items:
+          type: string
+        type: array
+      testdata:
+        description: >-
+          Base64 encoded CSV file that includes the test data on which the
+          inference will be run
+        type: string
+    required:
+      - testdata
+    type: object
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+security:
+  - BearerAuth: []
+x-components: {}
+
