@@ -58,11 +58,18 @@ def getSwaggerSpec(klass, trn):
 
     # Load json spec
     spec = json.loads(resp.get("data").get("getOpenAPISpec"))
+    path = None
     for p in spec.get("paths").keys():
         path = p
 
+    if path == None:
+        print("-"*40)
+        print(f"Ignoring trn {trn}, has bad spec")
+        print(spec)
+        return
+
     # Replace model path with a generic path
-    spec["paths"]["/model_specific_path"] = spec["paths"].pop(p)
+    spec["paths"]["/model_specific_path"] = spec["paths"].pop(path)
     print(json.dumps(spec, indent=2))
     spec2yaml = f"source/apiref/{klass}-2.yaml"
     spec3yaml = f"source/apiref/{klass}.yaml"
@@ -77,14 +84,38 @@ def getSwaggerSpec(klass, trn):
     os.remove(spec2yaml)
 
 
+TIMESERIES_V1_KLASSES = [
+    "timeseries-exo",
+    "prophet-multi-ts",
+    "autosarimax-multi-ts",
+    "sarimax-multi-ts",
+    "sarimax-uni-ts",
+    "autoarima-uni-ts",
+    "autosarimax-uni-ts",
+    "prophet-uni-ts",
+    "fbprophet-uni-ts",
+    "ops-test"
+]
+
+
 def getAllSpecs():
     # Get all the supported model types i.e. klasses
     klasses = DBHelper.getAllModelClasses()
 
     # Get the swagger 2.0 spec for each class
     for klass in klasses:
+        # skip V1 timeseries classes, they will be handled below
+        if klass in TIMESERIES_V1_KLASSES:
+            continue
         trn = DBHelper.getAModelForClass(klass)
-        # getSwaggerSpec(klass, trn)
+        if trn is not None:
+            getSwaggerSpec(klass, trn)
+
+    # Get all the supported timesereis subclasses
+    tsSubKlasses = DBHelper.getTimeseriesV2Subclasses()
+    for subKlass in tsSubKlasses:
+        trn = DBHelper.getAModelForSubClass(subKlass)
+        getSwaggerSpec(subKlass, trn)
 
     # Generate apiref.rst
     rst = baseAPIRefRST()

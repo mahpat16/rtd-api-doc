@@ -95,10 +95,10 @@ class DBHelper:
     def getAModelForClass(cls, klass):
         db = cls.handle()
         docs = db.collection(DB_COLL_MLMODELS).where(
-            'class', '==', klass).limit(1).get()
+            'class', '==', klass).where("availability", "==", "available").limit(1).get()
         if len(docs) != 1:
-            raise Exception(
-                f"Bad klass({klass}) in request. Num recs found {len(docs)}")
+            print(f"Bad klass({klass}) in request. Num recs found {len(docs)}")
+            return None
         doc = docs[0].to_dict()
         return doc.get('trn')
 
@@ -151,3 +151,32 @@ class DBHelper:
             i += 1
             if i > 25:
                 return
+
+    @classmethod
+    def getTimeseriesV2Subclasses(cls):
+        db = cls.handle()
+        docs = db.collection(DB_COLL_MLMODELS).where(
+            'class', '==', "timeseries").where("availability", "==", "available").stream()
+        subKlasses = set()
+        for d in docs:
+            doc = d.to_dict()
+            automl = doc.get("automl", {})
+            task = automl.get("task", "v1")
+            if task in ["univar", "univar-exo", "multivar", "multivar-exo"]:
+                subclass = doc.get("subclass")
+                if subclass is not None:
+                    subKlasses.add(doc.get("subclass"))
+
+        return list(subKlasses)
+
+    @classmethod
+    def getAModelForSubClass(cls, klass):
+        db = cls.handle()
+        docs = db.collection(DB_COLL_MLMODELS).where(
+            'subclass', '==', klass).limit(1).get()
+        if len(docs) != 1:
+            print(
+                f"Bad subklass({klass}) in request. Num recs found {len(docs)}")
+            return None
+        doc = docs[0].to_dict()
+        return doc.get('trn')
