@@ -101,6 +101,7 @@ TIMESERIES_V1_KLASSES = [
 def getAllSpecs():
     # Get all the supported model types i.e. klasses
     klasses = DBHelper.getAllModelClasses()
+    docKlasses = []
 
     # Get the swagger 2.0 spec for each class
     for klass in klasses:
@@ -110,16 +111,19 @@ def getAllSpecs():
         trn = DBHelper.getAModelForClass(klass)
         if trn is not None:
             getSwaggerSpec(klass, trn)
+            docKlasses.append(klass)
 
     # Get all the supported timesereis subclasses
     tsSubKlasses = DBHelper.getTimeseriesV2Subclasses()
     for subKlass in tsSubKlasses:
         trn = DBHelper.getAModelForSubClass(subKlass)
-        getSwaggerSpec(subKlass, trn)
+        if trn is not None:
+            getSwaggerSpec(subKlass, trn)
+            docKlasses.append(subKlass)
 
     # Generate apiref.rst
     rst = baseAPIRefRST()
-    for klass in klasses:
+    for klass in docKlasses:
         rst = addApiRefRST(rst, klass)
 
     apiRST = "./source/apiref.rst"
