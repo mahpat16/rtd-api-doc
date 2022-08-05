@@ -129,7 +129,7 @@ Once you click Finish the retraining job is kicked off. It typically takes 10-40
 Retraining jobs
 +++++++++++++++
 
-All your retraining jobs are listed under the **Retrain** menu item in the UI. 
+All your retraining jobs are listed under the **Retrain** menu item in the UI as shown below. 
 
 .. image:: retraintab.png
 
