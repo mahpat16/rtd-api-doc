@@ -37,7 +37,7 @@ The following univariate models with exogeneous variables are available on Tiyar
 * XGBoost
 * CatBoost
 
-.. note::  Timeseries Forecasting models are different from the other AI/ML models being served by Tiyaro. Forecasting is very specific to a user and his historical data. Hence the typical workflow for using a Timeseries model involves **retraining** the various models for your dataset and then using the **retrained** models for inference. The details of these steps are covered below.
+.. note::  Timeseries Forecasting models are different from the other AI/ML models being served by Tiyaro. Forecasting is very specific to a user and their historical data. Hence the typical workflow for using a Timeseries model involves **retraining** the various models for your dataset and then using the **retrained** models for inference. The details of these steps are covered below.
 
 In order for you to *customize* or *retrain* the models all you need is the historical data that will be used 
 to train the models. The entire process of training is simplified by the Tiyaro **EasyTrain** system. We built
