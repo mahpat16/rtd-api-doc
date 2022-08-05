@@ -48,14 +48,14 @@ training the models is shifted from the user to the EasyTrain system.
 
 How to train your custom timeseries predictive models
 -----------------------------------------------------
-1. Find the 'timeseries' base model.
+1. Find the **Timeseries** base model.
 2. Retrain or Customize the base model with your training data
 
 
 --------------------------------
-Find the 'timeseries' base model
+Find the *Timeseries* base model
 --------------------------------
-Simply type 'timeseries' or the name of any of the algorithms from above .e.g. prophet, autorarima in the Search box. 
+Simply search for 'timeseries' or the name of any of the models from above .e.g. prophet, autorarima in the Model Explorer.
 
 .. image:: timeseriesbase.png
 
@@ -83,7 +83,7 @@ Second step, provide your training data.
 Format of the expected training dataset
 +++++++++++++++++++++++++++++++++++++++
 
-The training data that needs to be provided needs to be a zip file. Here is a `sample dataset <https://public-model-demo.s3.us-west-2.amazonaws.com/timeseries-sample-dataset.zip>`_ 
+The training data needs to be packaged as a zip file. Here is a `sample dataset <https://public-model-demo.s3.us-west-2.amazonaws.com/timeseries-sample-dataset.zip>`_ 
 that you can download to inspect its format and structure. Lets look at the structure of this sample dataset to understand the expected format.
 
 .. code-block:: bash
@@ -124,7 +124,7 @@ Last step, Finish.
 
 .. image:: timeseriesfinish.png
 
-Once you click Finish the retraining job is kicked off. It typically takes 10-40 minutes to retrain a model depending on the size of your training datasaet and the number of algorithms/models that you are training.
+Once you click **Submit** the retraining job is kicked off. It typically takes 10-40 minutes to retrain a model depending on the size of your training datasaet and the number of algorithms/models that you are training.
 
 Retraining jobs
 +++++++++++++++
