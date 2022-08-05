@@ -5,7 +5,7 @@ Timeseries forecasting has multiple applications like predicting inventory, tren
 housing trends, weather and sales predictions to name a few. Users have a variety of timeseries predictive 
 models to choose from. Which type of model works best depends on the type of task and data that you are using. 
 Tiyaro is making a large number of timeseries models available that you can easily and quickly train, compare 
-and choose the model that works best for you without having to write a single line of code. There are 2 types of predictive models that are currently supported. Since 
+and choose the model that works best for you without having to write a single line of code. There are 2 types of predictive models that are currently supported. 
 
 * Univariate Forecasting
 * Univariate Forecasting with exogeneous variables
