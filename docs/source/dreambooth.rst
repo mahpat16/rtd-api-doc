@@ -183,7 +183,29 @@ Here is what the above parameters mean
 | **version** - The version of the model
 | **desc** - A description for this model
 | **datasetS3ObjName**: This is the name of your zip file. **This is the same name you used in the getJobInputURL for objName**
-| The other parameters are documented <here>
+| **model** -	The base stable diffusion model to fine tune using dreambooth.
+| **vae** -	The VAE required to run dreambooth training.
+| **seed** -	A seed for reproducible training.
+| **prior_loss_weight** -	The weight of prior preservation loss.
+| **instance_prompt** -	The prompt with identifier specifying the instance concept you want your base stable diffusion model to train on.
+| **class_prompt** -	The prompt to specify images in the same class (concept) as provided instance images.
+| **resolution** -	The resolution for input images, all the images in the train/validation dataset will be resized to this resolution.
+| **train_batch_size** -	Batch size (per device) for the training dataloader.
+| **lr_warmup_steps** -	Number of steps for the warmup in the lr scheduler.
+| **lr_scheduler** -	The scheduler type to use. Choose between ["linear", "cosine", "cosine_with_restarts", "polynomial", "constant", "constant_with_warmup"]
+| **num_class_images** -	Minimal class images for prior preservation loss. If not have enough images, additional images will be sampled with class_prompt.
+| **learning_rate	Initial** - learning rate (after the potential warmup period) to use.
+| **gradient_accumulation_steps** -	Number of updates steps to accumulate before performing a backward/update pass.
+| **max_train_steps** -	Total number of training steps to perform.  If provided, overrides num_train_epochs.
+| **train_text_encoder** -	Whether to train the text encoder.
+| **use_8bit_adam** -	Whether or not to use 8-bit Adam from bitsandbytes.
+| **mixed_precision** -	Whether to use mixed precision. Choose between fp16 and bf16 (bfloat16). Bf16 requires PyTorch >= 1.10 and an Nvidia Ampere GPU.
+| **with_prior_preservation** -	IF this is true then the class images are actually required, which are by default taken care of by the program, if you have yours the class images can used thereby reducing the time required to train dreambooth
+| **adam_beta1** -	The beta1 parameter for the Adam optimizer.
+| **adam_beta2** -	The beta2 parameter for the Adam optimizer.
+| **adam_weight_decay** -	Weight decay to use.
+| **adam_epsilon** -	Epsilon value for the Adam optimizer.
+| **max_grad_norm** -	Max gradient norm.
 
 Output
 ++++++
