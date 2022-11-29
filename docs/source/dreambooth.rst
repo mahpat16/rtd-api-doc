@@ -9,7 +9,7 @@ will guide you through the API way to trigger the retraining.
 
 All the APIs described below are implemented using GraphQL. You can access them from the following graphql endpoint.
 
-https://tbi56pnorvhbzbalsqal2is7dy.appsync-api.us-west-2.amazonaws.com/graphql
+https://control.tiyaro.ai/graphql
 
 .. note:: You have to provide authorization header to your request to access the endpoint. The header is
   ``Authorization: <YOUR_TIYARO_API_KEY>``
