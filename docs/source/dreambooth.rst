@@ -3,19 +3,58 @@ DreamBooth Retraining API
 
 .. _dreambooth:
 
-Tiyaro supports retraining a diffusion model using DreamBooth. If you want to try using the retraining
-from the Tiyaro console you can refer to this `step-by-step blog <https://www.tiyaro.ai/blog/dreambooth-retraining/>`_. This document
-will guide you through the API way to trigger the retraining.
+Tiyaro supports retraining a diffusion model using DreamBooth. If you want to do the retraining using the UI 
+in the Tiyaro console you can refer to this `step-by-step blog <https://www.tiyaro.ai/blog/dreambooth-retraining/>`_. This document
+will guide you through the API way to start the retraining.
 
-All the APIs described below are implemented using GraphQL. You can access them from the following graphql endpoint.
+All the retraining methods described below are implemented as GraphQL API. You can access them from the following graphql endpoint.
 
 https://control.tiyaro.ai/graphql
 
-.. note:: You have to provide authorization header to your request to access the endpoint. The header is
-  ``Authorization: <YOUR_TIYARO_API_KEY>``
 
 
-High Level Workflow for retraining via API
+Here is a working sample program that shows how you can call the Tiyaro GraphQL API from python. This sample is for illustration
+only. Its main purpose is to show the Headers that are needed to make the GraphQL call. Most languages have some high level library
+that makes it much easier to call GraphQL API, 'gql' is one such library for Python.
+
+:: 
+
+  import requests
+  import os
+  import sys
+  
+  url = "https://control.tiyaro.ai/graphql"
+  
+  apiKey = os.getenv("TIYARO_API_KEY")
+  if apiKey is None:
+      print("Set your TIYARO_API_KEY env variable")
+      sys.exit(1)
+  
+  #
+  # NOTE: Replace the following with a valid jobID
+  #
+  jobID = "replace_with_your_job_id"
+  if jobID == "replace_with_your_job_id":
+      print("Please set jobID to a valid job id that you got back from the 'newJobID' method")
+      sys.exit(1)
+  
+  
+  query = f'query {{getJobStatus(jobID: "{jobID}") {{statusEnum errMsg created finished}}}}'
+  payload = {"variables": {}, "query": query}
+  
+  headers = {
+      "content-type": "application/json",
+      "authorization": f"{apiKey}"
+  }
+  
+  response = requests.request("POST", url, json=payload, headers=headers)
+  print(response.text)
+
+
+.. note:: As shown above you have to provide your Tiyaro API key in the authorization header to your request. You can
+  generate your API key from the `API Keys <https://console.tiyaro.ai/apikeys>`_ page on Tiyaro.
+
+High Level Workflow for retraining via GraphQL API
   #. :ref:`createNewRetrain`
   #. :ref:`getPresgined`
   #. :ref:`uploadZip`
@@ -28,7 +67,7 @@ High Level Workflow for retraining via API
 Create a new retraining job
 ---------------------------
 ``newJobID(jobType: JobType): String``
-  First thing you do to start your retraining is to create a new job using ``newJobID``. This call returns you a 'jobID' that you will use in the rest of the methods.
+  First thing you do to start your retraining is to create a new job using ``newJobID``. This call returns you a 'jobID' that you will use in the rest of the methods. 
 
 Input
 +++++
@@ -44,8 +83,8 @@ jobID: String
 
 .. _getPresgined:
 
-Get presigned S3 url to upload your zipped images
--------------------------------------------------
+Get presigned S3 url to upload your images in a zip file
+--------------------------------------------------------
 ``getJobInputURL(jobID: String, objName: String): String``
   The images that you want to upload must all be packaged into a zip file. Use this method to get a presigned S3
   url where you can upload that zip file. The format of the zip file is explained below.
@@ -225,7 +264,9 @@ Check status of job
 -------------------
 ``getJobStatus(jobID: String): JobStatus``
   The ``getJobStatus`` method returns the status of a retraining job. statusEnum == ``done`` denotes a job that 
-  has successfully finished. If the statusEnum == ``failed`` you can check the error for the failure in ``errMsg``
+  has successfully finished. If the statusEnum == ``failed`` you can check the error for the failure in ``errMsg``. Note that
+  the getJobStatus call `only` makes sense for a job that has been started with the ``startRetrainingJob`` method. If you simply
+  create a newJobID and call job status on that newly created job you wont get any status back as the job hasnt even been submitted/started yet.
 
 Input
 +++++
