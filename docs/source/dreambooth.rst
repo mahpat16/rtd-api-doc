@@ -1,13 +1,13 @@
-DreamBooth Retraining API
+DreamBooth Training API
 =========================
 
 .. _dreambooth:
 
-Tiyaro supports retraining a diffusion model using DreamBooth. If you want to do the retraining using the UI 
+Tiyaro supports training a diffusion model using DreamBooth. If you want to do the training using the UI 
 in the Tiyaro console you can refer to this `step-by-step blog <https://www.tiyaro.ai/blog/dreambooth-retraining/>`_. This document
-will guide you through the API way to start the retraining.
+will guide you through the API way to start the training.
 
-All the retraining methods described below are implemented as GraphQL API. You can access them from the following graphql endpoint.
+All the training methods described below are implemented as GraphQL API. You can access them from the following graphql endpoint.
 
 https://control.tiyaro.ai/graphql
 
@@ -54,7 +54,7 @@ that makes it much easier to call GraphQL API, 'gql' is one such library for Pyt
 .. note:: As shown above you have to provide your Tiyaro API key in the authorization header to your request. You can
   generate your API key from the `API Keys <https://console.tiyaro.ai/apikeys>`_ page on Tiyaro.
 
-High Level Workflow for retraining via GraphQL API
+High Level Workflow for training via GraphQL API
   #. :ref:`createNewRetrain`
   #. :ref:`getPresgined`
   #. :ref:`uploadZip`
@@ -64,10 +64,10 @@ High Level Workflow for retraining via GraphQL API
 
 .. _createNewRetrain:
 
-Create a new retraining job
+Create a new training job
 ---------------------------
 ``newJobID(jobType: JobType): String``
-  First thing you do to start your retraining is to create a new job using ``newJobID``. This call returns you a 'jobID' that you will use in the rest of the methods. 
+  First thing you do to start your training is to create a new job using ``newJobID``. This call returns you a 'jobID' that you will use in the rest of the methods. 
 
 Input
 +++++
@@ -112,8 +112,8 @@ There are 2 types of images that you can upload.
 2. The images which are required by dreambooth training for an existing concept. Lets call this **class images**. This type of images are **optional**.
 
 Providing class images will help you to cut down training cost both in terms of time and credits. Especially 
-if you are retraining multiple instances of the same class, you may provide the same set of class images for 
-each taining that will speed up your retraining. Again, this is optional.
+if you are training multiple instances of the same class, you may provide the same set of class images for 
+each taining that will speed up your training. Again, this is optional.
 
 In the zip file you provide the instance images should be added to the root of the package. The class images should
 be added to a subdirectory called dataset_class. See example below::
@@ -161,10 +161,10 @@ As an example here is a sample python program that uploads a (zip) file to the p
 
 .. _startRetrain:
 
-Start retraining job
+Start training job
 --------------------
-``startRetrainingJob(jobID: String, input: JobInput): String``
-  This method is used to start the retraining job. The return value of this method can be ignored as it is the
+``startTrainingJob(jobID: String, input: JobInput): String``
+  This method is used to start the training job. The return value of this method can be ignored as it is the
   same jobID as was passed in the input. You can check the status of this job by using the ``getJobStatus`` method.
 
 Input
@@ -174,7 +174,7 @@ jobID - Type String
   job id of the job created by ``newJobID``
 
 input -  Type JobInput
-  input parameters for retraining. See details below.
+  input parameters for training. See details below.
 
 ::
 
@@ -255,7 +255,7 @@ Output
           e.g. If your zip file is called **milkyway.zip**
 
           * In getJobInputURL the **objName** should be milkyway.zip
-          * In startRetrainingJob the **datasetS3ObjName** should be milkyway.zip
+          * In startTrainingJob the **datasetS3ObjName** should be milkyway.zip
 
 
 .. _checkStatus:
@@ -263,10 +263,11 @@ Output
 Check status of job
 -------------------
 ``getJobStatus(jobID: String): JobStatus``
-  The ``getJobStatus`` method returns the status of a retraining job. statusEnum == ``done`` denotes a job that 
+  The ``getJobStatus`` method returns the status of a training job. statusEnum == ``done`` denotes a job that 
   has successfully finished. If the statusEnum == ``failed`` you can check the error for the failure in ``errMsg``. Note that
-  the getJobStatus call `only` makes sense for a job that has been started with the ``startRetrainingJob`` method. If you simply
+  the getJobStatus call `only` makes sense for a job that has been started with the ``startTrainingJob`` method. If you simply
   create a newJobID and call job status on that newly created job you wont get any status back as the job hasnt even been submitted/started yet.
+
 
 Input
 +++++
@@ -278,7 +279,7 @@ Output
 ++++++
 
 JobStatus: Type JobStatus
-  status of the job submitted using ``startRetrainingJob``
+  status of the job submitted using ``startTrainingJob``
 
 ::
 
@@ -287,6 +288,7 @@ JobStatus: Type JobStatus
     created: String
     finished: String
     statusEnum: JobStatusEnum
+    jobInput: String
   }
 
   enum JobStatusEnum {
@@ -296,15 +298,18 @@ JobStatus: Type JobStatus
     notfound
   }
 
+Note: **jobInput** is the json string representing the input parameters that were sent to this job. We return this
+input back so you can find out the params used to train this job. This is more of a convenience in case you
+dont want to store that meta data yourself. 
 
 .. _getRetrainModels:
 
-Get the API and ModelCard URL after successful retraining
+Get the API and ModelCard URL after successful training
 ---------------------------------------------------------
-``getRetrainedModels(jobID: String): [RetrainedModels]``
+``getTrainedModels(jobID: String): [TrainedModels]``
 
-The ``getRetrainedModels`` method returns the information of the models that are created after a 
-successful retraining
+The ``getTrainedModels`` method returns the information of the models that are created after a 
+successful training
 
 Input
 +++++
@@ -315,12 +320,12 @@ jobID: Type String
 Output
 ++++++
 
-RetrainedModels: Type RetrainedModels
-  Information about the retrained models
+TrainedModels: Type TrainedModels
+  Information about the trained models
 
 ::
 
-  type RetrainedModels {
+  type TrainedModels {
     vendor: String!
     version: String!
     name: String!

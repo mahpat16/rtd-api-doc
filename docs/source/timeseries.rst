@@ -37,9 +37,9 @@ The following univariate models with exogeneous variables are available on Tiyar
 * XGBoost
 * CatBoost
 
-.. note::  Timeseries Forecasting models are different from the other AI/ML models being served by Tiyaro. Forecasting is very specific to a user and their historical data. Hence the typical workflow for using a Timeseries model involves **retraining** the various models for your dataset and then using the **retrained** models for inference. The details of these steps are covered below.
+.. note::  Timeseries Forecasting models are different from the other AI/ML models being served by Tiyaro. Forecasting is very specific to a user and their historical data. Hence the typical workflow for using a Timeseries model involves **training** the various models for your dataset and then using the **trained** models for inference. The details of these steps are covered below.
 
-In order for you to *customize* or *retrain* the models all you need is the historical data that will be used 
+In order for you to *customize* or *train* the models all you need is the historical data that will be used 
 to train the models. The entire process of training is simplified by the Tiyaro **EasyTrain** system. We built
 the EasyTrain system so that users can train all the algorithms in a single step without writing a single line of code. 
 EasyTrain also uses intelligent defaults for the various hyperparameters requried by the models so the burden of 
@@ -49,7 +49,7 @@ training the models is shifted from the user to the EasyTrain system.
 How to train your custom timeseries predictive models
 -----------------------------------------------------
 1. Find the **Timeseries** base model.
-2. Retrain or Customize the base model with your training data
+2. Train or Customize the base model with your training data
 
 
 --------------------------------
@@ -67,11 +67,11 @@ which you can train your custom models. Selecting this model will open the model
 Note the **Run EasyTrain** button on the model card
 
 --------------------------------------------------------
-Retrain/Customize the base model with your training data
+Train/Customize the base model with your training data
 --------------------------------------------------------
-Click on the **Run EasyTrain** button to start the retraining. It will walk you through the steps of retraining the timeseries model. 
+Click on the **Run EasyTrain** button to start the training. It will walk you through the steps of training the timeseries model. 
 
-First step, name your retraining project.
+First step, name your training project.
 
 .. image:: easytraintimeseries.png
 
@@ -124,16 +124,16 @@ Last step, Finish.
 
 .. image:: timeseriesfinish.png
 
-Once you click **Submit** the retraining job is kicked off. It typically takes 10-40 minutes to retrain a model depending on the size of your training datasaet and the number of algorithms/models that you are training.
+Once you click **Submit** the training job is kicked off. It typically takes 10-40 minutes to train a model depending on the size of your training datasaet and the number of algorithms/models that you are training.
 
-Retraining jobs
+Training jobs
 +++++++++++++++
 
-All your retraining jobs are listed under the **Retrain** menu item in the UI as shown below. 
+All your training jobs are listed under the **Train** menu item in the UI as shown below. 
 
 .. image:: retraintab.png
 
-Clicking on one of the jobs will open up the **retraining** card. On the retraining card the *Config* subtab shows 
+Clicking on one of the jobs will open up the **training** card. On the training card the *Config* subtab shows 
 the details of inputs used to train the job as shown below.
 
 .. image:: retraincard.png
@@ -154,5 +154,5 @@ In case you are wondering what about Univariate vs Univaraite with exogeneous in
 Summary
 -------
 
-We saw the process of retraining your custom timeseries forecasting models to find the retrained models in the *Retrainn* tab to going to the model card of the retrained models where you find
-all the information to use those retrained models in your application. You can also search for your models in the Model Explorer.
+We saw the process of training your custom timeseries forecasting models to find the trained models in the *Trainn* tab to going to the model card of the trained models where you find
+all the information to use those trained models in your application. You can also search for your models in the Model Explorer.
