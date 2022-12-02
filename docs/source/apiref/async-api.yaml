@@ -1,0 +1,238 @@
+swagger: '2.0'
+info:
+  title: Tiyaro
+  version: '1.0'
+host: api.tiyaro.ai
+basePath: /
+schemes:
+  - https
+paths:
+  /async_request_specific_poll_url:
+    get:
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          schema:
+            properties:
+              response:
+                $ref: '#/definitions/AsyncAPIGetResultOutput'
+            type: object
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /model_specific_async_infer_endpoint:
+    parameters:
+      - description: 'Available service tiers: [cpuflex(default), gpuflex]'
+        in: query
+        name: serviceTier
+        required: false
+        type: string
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/AsyncAPIInferInput'
+      responses:
+        '200':
+          description: Success
+          schema:
+            properties:
+              response:
+                $ref: '#/definitions/AsyncAPIInferOut'
+            type: object
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+  /v1/input/upload-url:
+    parameters:
+      - description: Extension of the uploaded payload. Sample values 'mp3' for audio.
+        in: query
+        name: extension
+        required: true
+        type: string
+    post:
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Success
+          schema:
+            properties:
+              response:
+                $ref: '#/definitions/AsyncAPIUploadURLReturn'
+            type: object
+        default:
+          description: Unexpected error
+          schema:
+            $ref: '#/definitions/Error'
+definitions:
+  AsyncAPIGetResultOutput:
+    properties:
+      acceptedAt:
+        description: DateTime when the request was accepted
+        type: string
+      completedAt:
+        description: DateTime when the request finished processing
+        type: string
+      id:
+        description: ID of async request
+        type: string
+      model:
+        description: Model name
+        type: string
+      result:
+        $ref: '#/definitions/AsyncAPIInferGenericOutput'
+      startedAt:
+        description: DateTime when the request processing started
+        type: string
+      status:
+        description: Status of the request
+        enum:
+          - accepted
+          - pending
+          - processing
+          - success
+          - failed
+          - cancelled
+        type: string
+    required:
+      - acceptedAt
+      - completedAt
+      - id
+      - model
+      - result
+      - startedAt
+      - status
+    type: object
+  AsyncAPIInferGenericInput:
+    properties:
+      placholder:
+        description: >-
+          This is just a placeholder, each model will have its own model
+          specific input params. Please refer to the API (sync) documentation of
+          the model to find out the parameters that are accepted by that
+          specific model.
+        type: string
+    required:
+      - placholder
+    type: object
+  AsyncAPIInferGenericOutput:
+    properties:
+      placholder:
+        description: >-
+          This is just a placeholder, each model will have its own model
+          specific results. Please refer to the API (sync) documentation of the
+          model to find out the results returned by that model.
+        type: string
+    required:
+      - placholder
+    type: object
+  AsyncAPIInferInput:
+    properties:
+      URL:
+        description: >-
+          The presigned URL where the payload was uploaded. This is the same URL
+          that was returned by the upload-url method
+        type: string
+      input:
+        $ref: '#/definitions/AsyncAPIInferGenericInput'
+    required:
+      - URL
+      - input
+    type: object
+  AsyncAPIInferOut:
+    properties:
+      response:
+        $ref: '#/definitions/AsyncAPIInferResponse'
+    required:
+      - response
+    type: object
+  AsyncAPIInferResponse:
+    properties:
+      acceptedAt:
+        description: DateTime when the request was accepted
+        type: string
+      completedAt:
+        description: DateTime when the request finished processing
+        type: string
+      id:
+        description: ID of async request
+        type: string
+      model:
+        description: Model name
+        type: string
+      result:
+        description: None
+        type: string
+      startedAt:
+        description: DateTime when the request processing started
+        type: string
+      status:
+        description: Status of the request
+        enum:
+          - accepted
+          - pending
+          - processing
+          - success
+          - failed
+          - cancelled
+        type: string
+      urls:
+        $ref: '#/definitions/AsyncAPIInferResultGet'
+    required:
+      - acceptedAt
+      - completedAt
+      - id
+      - model
+      - result
+      - startedAt
+      - status
+      - urls
+    type: object
+  AsyncAPIInferResultGet:
+    properties:
+      GET:
+        description: The presigned URL where you can poll for you async result completiong
+        type: string
+    type: object
+  AsyncAPIUploadURLReturn:
+    properties:
+      uplaodUrl:
+        $ref: '#/definitions/AsyncAPIUploadURLReturnPut'
+    required:
+      - uplaodUrl
+    type: object
+  AsyncAPIUploadURLReturnPut:
+    properties:
+      PUT:
+        description: The presigned URL where you can PUT(upload) your payload
+        type: string
+    type: object
+  Error:
+    properties:
+      code:
+        type: integer
+      message:
+        type: string
+    required:
+      - code
+      - message
+    type: object
+securityDefinitions:
+  BearerAuth:
+    scheme: bearer
+    type: https
+security:
+  - BearerAuth: []
+x-components: {}
