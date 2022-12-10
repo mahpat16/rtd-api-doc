@@ -133,7 +133,7 @@ be added to a subdirectory called dataset_class. See example below::
     dataset_class/dog2.jpeg
 
 In the above example 'alvan-nee-9M0tSjb-cpA-unsplash.jpeg', 'alvan-nee-bQaAJCbNq3g-unsplash.jpeg' etc are instance images that are directly at the root
-of the package. Whereas 'dog5.jpeg', 'dog4.jpeg' etc are class images that are added to a subdirectly 'dataset_class'. You can
+of the package. Whereas 'dog5.jpeg', 'dog4.jpeg' etc are class images that are added to a subdirectory 'dataset_class'. You can
 also examine this `sample zip file <https://public-model-demo.s3.us-west-2.amazonaws.com/dog_toy_example.zip>`_ to see how it is packaged.
 
 
