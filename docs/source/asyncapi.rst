@@ -3,7 +3,7 @@ Async API
 
 .. _asyncapi:
 
-Asynchronous APIs (Async API for short) are supported for long running methods. Take audio transcrption is an example, if you wanted 
+Asynchronous APIs (Async API for short) are supported for long running methods. Take audio transcrption as an example, if you wanted 
 to transcribe an hour long audio file then doing a synchronous API call is not viable. You could break the
 audio file into smaller chunks, say 1 min chunk and then use the synchronous API. On the other hand this is a 
 perfect use case to simply use the Async API. Async API gives you a way to submit a request and then
