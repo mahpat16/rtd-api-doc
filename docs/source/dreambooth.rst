@@ -115,20 +115,25 @@ Providing class images will help you to cut down training cost both in terms of 
 if you are training multiple instances of the same class, you may provide the same set of class images for 
 each taining that will speed up your training. Again, this is optional.
 
-In the zip file you provide the instance images should be added to the root of the package. The class images should
+In the zip file you provide, the instance images should be added to the root of the package. The class images should
 be added to a subdirectory called dataset_class. See example below::
 
-  └── milkyway.zip/
-      ├── instance-image1.jpeg
-      ├── instance-image2.jpeg
-      ├── .
-      ├── .
-      └── dataset_class/
-          ├── class-image1.jpeg
-          └── class-image2.jpeg
-  
-In the above example 'instance-image1.jpeg' and 'instance-image2.jpeg' are instance images that are directly at the root
-of the package. Whereas 'class-image1.jpeg' and 'class-image2.jpeg' are added to a subdirectly 'dataset_class'. You can
+  zip -sf dog_toy_example.zip 
+  Archive contains:
+    alvan-nee-9M0tSjb-cpA-unsplash.jpeg
+    alvan-nee-bQaAJCbNq3g-unsplash.jpeg
+    alvan-nee-brFsZ7qszSY-unsplash.jpeg
+    alvan-nee-eoqnr8ikwFE-unsplash.jpeg
+    alvan-nee-Id1DBHv4fbg-unsplash.jpeg
+    dataset_class/
+    dataset_class/dog5.jpeg
+    dataset_class/dog4.jpeg
+    dataset_class/dog3.jpeg
+    dataset_class/dog1.jpeg
+    dataset_class/dog2.jpeg
+
+In the above example 'alvan-nee-9M0tSjb-cpA-unsplash.jpeg', 'alvan-nee-bQaAJCbNq3g-unsplash.jpeg' etc are instance images that are directly at the root
+of the package. Whereas 'dog5.jpeg', 'dog4.jpeg' etc are class images that are added to a subdirectly 'dataset_class'. You can
 also examine this `sample zip file <https://public-model-demo.s3.us-west-2.amazonaws.com/dog_toy_example.zip>`_ to see how it is packaged.
 
 
