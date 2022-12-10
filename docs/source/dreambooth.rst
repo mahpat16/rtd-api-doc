@@ -118,7 +118,7 @@ each taining that will speed up your training. Again, this is optional.
 In the zip file you provide, the instance images should be added to the root of the package. The class images should
 be added to a subdirectory called dataset_class. See example below::
 
-  zip -sf dog_toy_example.zip 
+  $ zip -sf dog_toy_example.zip 
   Archive contains:
     alvan-nee-9M0tSjb-cpA-unsplash.jpeg
     alvan-nee-bQaAJCbNq3g-unsplash.jpeg
